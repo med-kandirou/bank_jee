@@ -9,7 +9,7 @@
 
 <jsp:include page="Component/header.jsp" />
 
-
+<a href="/client-display">Display Client</a><br>
 <a href="/client-create">Create Client</a><br>
 <a href="/client-update">Update Client</a><br>
 

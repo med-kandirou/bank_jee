@@ -2,7 +2,7 @@ CREATE TABLE personne (
                           nom varchar(50) not null,
                           prenom varchar(50) not null,
                           dateNaissance date not null,
-                          telephone varchar(50) not null,
+                          telephone varchar(50) not null
 );
 
 CREATE TABLE client (
@@ -16,3 +16,5 @@ CREATE TABLE employe (
                         dateDeRecrutement date not null,
                         adresseEmail varchar(50) not null
 ) INHERITS (Personne);
+
+

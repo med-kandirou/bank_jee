@@ -14,4 +14,9 @@ public class ImpEmploye implements IEmploye {
     public int delete(String s) {
         return 0;
     }
+
+    @Override
+    public Optional<Employe> update(Employe employe) {
+        return Optional.empty();
+    }
 }
