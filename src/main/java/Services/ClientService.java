@@ -31,4 +31,9 @@ public class ClientService {
         Optional<Client> client= impClient.getClientbyId(code);
         return client;
     }
+
+    public ArrayList search(String param){
+        ArrayList<Client> clients= impClient.search(param);
+        return clients;
+    }
 }

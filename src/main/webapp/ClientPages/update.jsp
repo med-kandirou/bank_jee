@@ -17,6 +17,11 @@
 <body>
     <jsp:include page="../Component/header.jsp" />
 
+
+    <div class="search-container">
+        <input type="text" class="search-bar" placeholder="Rechercher...">
+        <button class="search-button">Rechercher</button>
+    </div>
     <div class="form-container">
         <%
             Optional<Client> c =(Optional<Client>)request.getAttribute("client");

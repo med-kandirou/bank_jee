@@ -115,4 +115,35 @@ public class ImpClient implements IClient {
         }
         return Optional.empty();
     }
+
+
+    public ArrayList<Client> search(String param) {
+        ArrayList<Client> Clients= new ArrayList<>();
+        try {
+            String selectSql = "SELECT * FROM client where code like ? or nom like ? or prenom like ? or telephone like ? or adresse like ?";
+            PreparedStatement preparedStatement = cnx.prepareStatement(selectSql);
+            preparedStatement.setString(1, param);
+            preparedStatement.setString(2,param);
+            preparedStatement.setString(3,param);
+            preparedStatement.setString(4,param);
+            preparedStatement.setString(5,param);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                String code=resultSet.getString("code");
+                String fname=resultSet.getString("nom");
+                String lname=resultSet.getString("prenom");
+                String phone=resultSet.getString("telephone");
+                LocalDate date=resultSet.getDate("datenaissance").toLocalDate();
+                String adresse=resultSet.getString("adresse");
+                Client client=new Client(code,fname,lname,date,phone,adresse);
+                Clients.add(client);
+            }
+            resultSet.close();
+            preparedStatement.close();
+        }
+        catch (SQLException e){
+            System.out.print(e.getMessage());
+        }
+        return Clients;
+    }
 }

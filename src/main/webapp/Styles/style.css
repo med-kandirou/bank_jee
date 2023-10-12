@@ -93,6 +93,31 @@ button[type="submit"] {
     cursor: pointer;
 }
 
+
+.search-bar {
+    width: 300px;
+    height: 40px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 5px;
+    margin: 10px;
+}
+
+/* Style CSS pour le bouton de recherche */
+.search-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+/* Style CSS pour le conteneur de la barre de recherche */
+.search-container {
+    text-align: center;
+}
+
 /* Lorsque l'utilisateur survole le bouton */
 button[type="submit"]:hover {
     background-color: #0056b3;

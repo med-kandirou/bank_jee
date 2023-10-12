@@ -21,7 +21,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
-@WebServlet(name ="CLientServlet", urlPatterns = {"/client-create", "/client-update","/client-display"})
+@WebServlet(name ="CLientServlet", urlPatterns = {"/client-create", "/client-update","/client-display","/client-search"})
 public class ClientServlet extends HttpServlet {
     String code;
     String fname;
@@ -52,6 +52,11 @@ public class ClientServlet extends HttpServlet {
                 String code = request.getParameter("code");
                 request.setAttribute("client",service.getClientbyId(code));
                 request.getRequestDispatcher("/ClientPages/update.jsp").forward(request, response);
+                break;
+            case "/client-search" :
+                String param = request.getParameter("param");
+                request.setAttribute("clients",service.search(param));
+                request.getRequestDispatcher("/ClientPages/display.jsp").forward(request, response);
                 break;
             default:
                 break;

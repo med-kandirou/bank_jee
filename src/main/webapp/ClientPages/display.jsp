@@ -15,6 +15,13 @@
 <body>
 <table>
     <jsp:include page="../Component/header.jsp" />
+
+    <form action="/client-search" action="GET">
+        <div class="search-container">
+            <input type="text" name="param" class="search-bar" placeholder="Rechercher...">
+            <button type="submit" class="search-button">Rechercher</button>
+        </div>
+    </form>
     <tr>
         <th>Code</th>
         <th>First Name</th>
@@ -25,7 +32,6 @@
         <th>Delete</th>
         <th>update</th>
     </tr>
-    <c:forEach items="${clients}" var="client">
         <%
             ArrayList<Client> clients =(ArrayList<Client>)request.getAttribute("clients");
             for(Client c:clients){%>
@@ -40,8 +46,6 @@
             <td><a>Delete</a></td>
         </tr>
         <%}%>
-    </c:forEach>
-
 </table>
 </body>
 </html>
