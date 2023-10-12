@@ -44,14 +44,14 @@ public class ImpClient implements IClient {
     @Override
     public Optional<Client> update(Client client) {
         try {
-            String updateSql = "update client set nom=? , prenom=? , datenaissance=?, telephone=? ,adresse=? where code=?";
+            String updateSql = "update client set nom=? , prenom=? , datenaissance=?, telephone=? ,adresse=? where code like ?";
             PreparedStatement preparedStatement = cnx.prepareStatement(updateSql);
             preparedStatement.setString(1, client.getFirstName());
             preparedStatement.setString(2,client.getLastName());
             preparedStatement.setDate(3, Date.valueOf(client.getBirthday()));
             preparedStatement.setString(4,client.getPhone());
             preparedStatement.setString(5,client.getAdresse());
-            preparedStatement.setString(6,client.getAdresse());
+            preparedStatement.setString(6,client.getCode());
             int rowsAffected = preparedStatement.executeUpdate();
             if (rowsAffected > 0) {
                 preparedStatement.close();
@@ -92,18 +92,19 @@ public class ImpClient implements IClient {
 
     @Override
     public Optional<Client> getClientbyId(String code) {
-        Client client=new Client(null,null,null,null,null,null);
+        Client client = null;
         try {
             String selectSql = "SELECT * FROM client WHERE code like '"+code+"'";
             PreparedStatement preparedStatement = cnx.prepareStatement(selectSql);
             ResultSet resultSet = preparedStatement.executeQuery();
             if(resultSet.next()){
-                client.setCode(resultSet.getString("code"));
-                client.setFirstName(resultSet.getString("nom"));
-                client.setLastName(resultSet.getString("prenom"));
-                client.setBirthday(resultSet.getDate("datenaissance").toLocalDate());
-                client.setPhone(resultSet.getString("telephone"));
-                client.setAdresse(resultSet.getString("adresse"));
+                String codec=resultSet.getString("code");
+                String fname=resultSet.getString("nom");
+                String lname=resultSet.getString("prenom");
+                String phone=resultSet.getString("telephone");
+                LocalDate date=resultSet.getDate("datenaissance").toLocalDate();
+                String adresse=resultSet.getString("adresse");
+                client=new Client(codec,fname,lname,date,phone,adresse);
             }
             resultSet.close();
             preparedStatement.close();

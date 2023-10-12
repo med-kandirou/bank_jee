@@ -26,4 +26,9 @@ public class ClientService {
         ArrayList<Client> clients= impClient.getAll();
         return clients;
     }
+
+    public Optional<Client> getClientbyId(String code){
+        Optional<Client> client= impClient.getClientbyId(code);
+        return client;
+    }
 }

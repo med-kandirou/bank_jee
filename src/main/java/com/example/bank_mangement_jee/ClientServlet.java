@@ -3,6 +3,9 @@ package com.example.bank_mangement_jee;
 import DAO.ImpClient;
 import DTO.Client;
 import Services.ClientService;
+import jakarta.json.Json;
+import jakarta.json.JsonObject;
+import jakarta.json.JsonReader;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -10,14 +13,24 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
+import java.util.Optional;
 
-//@WebServlet(name = "CLientServlet", value = "/client-create")
 @WebServlet(name ="CLientServlet", urlPatterns = {"/client-create", "/client-update","/client-display"})
 public class ClientServlet extends HttpServlet {
+    String code;
+    String fname;
+    String lname;
+    String bday;
+    String tele;
+    String adresse;
+    DateTimeFormatter formatter=null;
+    Client cl;
     String requestURL;
     ClientService service;
     @Override
@@ -36,25 +49,17 @@ public class ClientServlet extends HttpServlet {
                 request.getRequestDispatcher("/ClientPages/create.jsp").forward(request, response);
                 break;
             case "/client-update" :
+                String code = request.getParameter("code");
+                request.setAttribute("client",service.getClientbyId(code));
                 request.getRequestDispatcher("/ClientPages/update.jsp").forward(request, response);
                 break;
             default:
                 break;
         }
-
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String code;
-        String fname;
-        String lname;
-        String bday;
-        String tele;
-        String adresse;
-        LocalDate localDate=null;
-        DateTimeFormatter formatter=null;
-        Client cl;
         switch (this.requestURL){
             case "/client-create" :
                 code = req.getParameter("code");
@@ -64,28 +69,27 @@ public class ClientServlet extends HttpServlet {
                 tele = req.getParameter("tele");
                 adresse = req.getParameter("adresse");
                 formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-                localDate = LocalDate.parse(bday, formatter);
-                cl= new Client(code,fname,lname,localDate,tele,adresse);
+                cl= new Client(code,fname,lname,LocalDate.parse(bday, formatter),tele,adresse);
                 boolean added=this.service.add(cl);
                 if(added){
                     req.getRequestDispatcher("/ClientPages/create.jsp").forward(req, resp);
                 }
                 break;
-            case "/client-update" :
+            case "/client-update":
                 code = req.getParameter("code");
                 fname = req.getParameter("fname");
                 lname = req.getParameter("lname");
                 bday = req.getParameter("bday");
-                tele = req.getParameter("tele");
+                tele = req.getParameter("phone");
                 adresse = req.getParameter("adresse");
                 formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-                localDate = LocalDate.parse(bday, formatter);
-                cl= new Client(code,fname,lname,localDate,tele,adresse);
+                cl= new Client(code,fname,lname,LocalDate.parse(bday, formatter),tele,adresse);
                 boolean updated=this.service.update(cl);
                 if(updated){
+                    Optional<Client> client=Optional.ofNullable(cl);
+                    req.setAttribute("client",client);
                     req.getRequestDispatcher("/ClientPages/update.jsp").forward(req, resp);
                 }
-                break;
             default:
                 break;
         }

@@ -22,6 +22,8 @@
         <th>Birthday</th>
         <th>Phone</th>
         <th>Adresse</th>
+        <th>Delete</th>
+        <th>update</th>
     </tr>
     <c:forEach items="${clients}" var="client">
         <%
@@ -34,10 +36,11 @@
             <td><%=c.getBirthday()%></td>
             <td><%=c.getPhone()%></td>
             <td><%=c.getAdresse()%></td>
+            <td><a href="/client-update?code=<%=c.getCode()%>">Update</a></td>
+            <td><a>Delete</a></td>
         </tr>
         <%}%>
     </c:forEach>
-
 
 </table>
 </body>
