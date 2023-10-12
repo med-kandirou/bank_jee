@@ -1,5 +1,6 @@
 <%@ page import="DTO.Client" %>
-<%@ page import="java.util.ArrayList" %><%--
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="DTO.Employe" %><%--
   Created by IntelliJ IDEA.
   User: YC
   Date: 10/10/2023
@@ -16,34 +17,36 @@
 <table>
     <jsp:include page="../Component/header.jsp" />
 
-    <form action="/client-search" action="GET">
+    <form action="/employe-search" action="GET">
         <div class="search-container">
             <input type="text" name="param" class="search-bar" placeholder="Rechercher...">
             <button type="submit" class="search-button">Rechercher</button>
         </div>
     </form>
     <tr>
-        <th>Code</th>
+        <th>Matricule</th>
         <th>First Name</th>
         <th>Last Name</th>
         <th>Birthday</th>
         <th>Phone</th>
-        <th>Adresse</th>
+        <th>Adresse email</th>
+        <th>Recrutement Date</th>
         <th>update</th>
     </tr>
-        <%
-            ArrayList<Client> clients =(ArrayList<Client>)request.getAttribute("clients");
-            for(Client c:clients){%>
-        <tr>
-            <td><%=c.getCode()%></td>
-            <td><%=c.getFirstName()%></td>
-            <td><%=c.getLastName()%></td>
-            <td><%=c.getBirthday()%></td>
-            <td><%=c.getPhone()%></td>
-            <td><%=c.getAdresse()%></td>
-            <td><a href="/client-update?code=<%=c.getCode()%>">Update</a></td>
-        </tr>
-        <%}%>
+    <%
+        ArrayList<Employe> employes =(ArrayList<Employe>)request.getAttribute("employes");
+        for(Employe emp:employes){%>
+    <tr>
+        <td><%= emp.getMatricule() %></td>
+        <td><%= emp.getFirstName() %></td>
+        <td><%= emp.getLastName() %></td>
+        <td><%= emp.getBirthday() %></td>
+        <td><%= emp.getPhone() %></td>
+        <td><%= emp.getAdresseemail() %></td>
+        <td><%= emp.getDaterecrutement() %></td>
+        <td><a href="/employe-update?mat=<%=emp.getMatricule()%>">Update</a></td>
+    </tr>
+    <%}%>
 </table>
 </body>
 </html>

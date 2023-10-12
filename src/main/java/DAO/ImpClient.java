@@ -37,11 +37,6 @@ public class ImpClient implements IClient {
     }
 
     @Override
-    public int delete(String s) {
-        return 0;
-    }
-
-    @Override
     public Optional<Client> update(Client client) {
         try {
             String updateSql = "update client set nom=? , prenom=? , datenaissance=?, telephone=? ,adresse=? where code like ?";
@@ -115,7 +110,6 @@ public class ImpClient implements IClient {
         }
         return Optional.empty();
     }
-
 
     public ArrayList<Client> search(String param) {
         ArrayList<Client> Clients= new ArrayList<>();

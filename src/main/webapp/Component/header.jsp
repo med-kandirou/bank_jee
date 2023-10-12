@@ -7,30 +7,49 @@
 --%>
 
 <style>
-    /* Styles pour la barre de navigation */
     .navbar {
-        background-color: #333;
-        overflow: hidden;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 20px;
     }
 
     .navbar a {
-        float: left;
-        display: block;
-        color: white;
-        text-align: center;
-        padding: 14px 16px;
         text-decoration: none;
+        color: #000000;
+        margin: 0 15px;
+        font-weight: bold;
     }
 
-    .navbar a:hover {
-        background-color: #ddd;
-        color: black;
+    .logo {
+        font-size: 24px;
+    }
+
+    .nav-links {
+        list-style: none;
+        display: flex;
+    }
+
+    .nav-links li {
+        margin: 0 10px;
+    }
+
+    .nav-links a:hover {
+        border-bottom: 2px solid #007bff;
+        padding-bottom: 5px;
+        transition: all 0.3s ease;
     }
 </style>
-<div class="navbar">
-    <a href="#">Accueil</a>
-    <a href="#">À propos</a>
-    <a href="#">Services</a>
-    <a href="#">Contact</a>
-</div>
+<nav class="navbar">
+    <div class="logo">
+        <a href="#">Mon Site Web</a>
+    </div>
+    <ul class="nav-links">
+        <li><a href="../index.jsp">Accueil</a></li>
+        <li><a href="/client-display">Display clients</a></li>
+        <li><a href="/client-create">Create client</a></li>
+        <li><a href="/employe-display">Display employes</a></li>
+        <li><a href="/employe-create">Create employe</a></li>
+    </ul>
+</nav>
 
