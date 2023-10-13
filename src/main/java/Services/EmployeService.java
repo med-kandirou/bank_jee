@@ -38,4 +38,8 @@ public class EmployeService {
         ArrayList<Employe> employes= impEmploye.search(param);
         return employes;
     }
+
+    public boolean delete(String id){
+        return impEmploye.delete(id);
+    }
 }

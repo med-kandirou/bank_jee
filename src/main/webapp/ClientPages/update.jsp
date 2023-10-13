@@ -27,7 +27,7 @@
             Optional<Client> c =(Optional<Client>)request.getAttribute("client");
             %>
         <form class="form" action="/client-update" method="post">
-            <div class="form-group">
+            <div hidden="hidden" class="form-group">
                 <label >Code :</label>
                 <input type="text" name="code" value="<%= c.get().getCode() %>">
             </div>

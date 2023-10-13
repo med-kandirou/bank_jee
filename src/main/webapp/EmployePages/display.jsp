@@ -32,6 +32,7 @@
         <th>Adresse email</th>
         <th>Recrutement Date</th>
         <th>update</th>
+        <th>Delete</th>
     </tr>
     <%
         ArrayList<Employe> employes =(ArrayList<Employe>)request.getAttribute("employes");
@@ -45,8 +46,26 @@
         <td><%= emp.getAdresseemail() %></td>
         <td><%= emp.getDaterecrutement() %></td>
         <td><a href="/employe-update?mat=<%=emp.getMatricule()%>">Update</a></td>
+        <td><button onclick="confirmer('<%=emp.getMatricule()%>')">Delete</button></td>
     </tr>
     <%}%>
 </table>
+<script>
+    function confirmer(id){
+        Swal.fire({
+            title: 'Are you sure?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.replace("/employe-delete?id="+id+"");
+            }
+        })
+    }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
 </body>
 </html>

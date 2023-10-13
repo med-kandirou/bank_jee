@@ -40,9 +40,10 @@
         transition: all 0.3s ease;
     }
 </style>
+<link href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
 <nav class="navbar">
     <div class="logo">
-        <a href="#">Mon Site Web</a>
+        <img src="https://static.vecteezy.com/system/resources/previews/000/593/729/original/vector-bank-building-icon-isolated-on-white-background.jpg" height="100" width="100">
     </div>
     <ul class="nav-links">
         <li><a href="../index.jsp">Accueil</a></li>

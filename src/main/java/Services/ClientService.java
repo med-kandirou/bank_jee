@@ -2,8 +2,10 @@ package Services;
 
 import DAO.ImpClient;
 import DTO.Client;
+import jakarta.validation.OverridesAttribute;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 public class ClientService {
@@ -12,19 +14,17 @@ public class ClientService {
         this.impClient=impClient;
     }
 
-    public boolean add(Client client){
+    public Boolean add(Client client){
         Optional<Client> optClient= impClient.add(client);
         return optClient.isPresent();
     }
 
     public boolean update(Client client){
-        Optional<Client> optClient= impClient.update(client);
-        return optClient.isPresent();
+        return impClient.update(client).isPresent();
     }
 
-    public ArrayList getAll(){
-        ArrayList<Client> clients= impClient.getAll();
-        return clients;
+    public List<Client> getAll(){
+        return impClient.getAll();
     }
 
     public Optional<Client> getClientbyId(String code){
@@ -35,5 +35,9 @@ public class ClientService {
     public ArrayList search(String param){
         ArrayList<Client> clients= impClient.search(param);
         return clients;
+    }
+
+    public boolean delete(String id){
+        return impClient.delete(id);
     }
 }

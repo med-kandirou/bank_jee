@@ -30,20 +30,40 @@
         <th>Phone</th>
         <th>Adresse</th>
         <th>update</th>
+        <th>Delete</th>
     </tr>
         <%
             ArrayList<Client> clients =(ArrayList<Client>)request.getAttribute("clients");
             for(Client c:clients){%>
         <tr>
-            <td><%=c.getCode()%></td>
+            <td ><%=c.getCode()%></td>
             <td><%=c.getFirstName()%></td>
             <td><%=c.getLastName()%></td>
             <td><%=c.getBirthday()%></td>
             <td><%=c.getPhone()%></td>
             <td><%=c.getAdresse()%></td>
             <td><a href="/client-update?code=<%=c.getCode()%>">Update</a></td>
+            <td><button onclick="confirmer('<%=c.getCode()%>')">Delete</button></td>
         </tr>
         <%}%>
 </table>
+
+<script>
+    function confirmer(id){
+        Swal.fire({
+            title: 'Are you sure?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.replace("/client-delete?id="+id+"");
+            }
+        })
+    }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
 </body>
 </html>

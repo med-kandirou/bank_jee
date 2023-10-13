@@ -60,6 +60,23 @@ public class ImpClient implements IClient {
     }
 
     @Override
+    public boolean delete(String id) {
+        try {
+            String deleteSql = "DELETE FROM client WHERE code like ?";
+            PreparedStatement preparedStatement = cnx.prepareStatement(deleteSql);
+            preparedStatement.setString(1, id);
+            int rowsAffected = preparedStatement.executeUpdate();
+            if (rowsAffected > 0) {
+                return true;
+            }
+        }
+        catch (SQLException e){
+            System.out.print(e.getMessage());
+        }
+        return false;
+    }
+
+    @Override
     public ArrayList<Client> getAll() {
         ArrayList<Client> Clients= new ArrayList<>();
         try {

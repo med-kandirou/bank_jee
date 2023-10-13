@@ -15,7 +15,7 @@
 <body>
 <div class="flex justify-center items-center mt-11 min-h-screen bg-gray-100 dark:bg-gray-900">
     <div class="bg-white dark:bg-gray-800 shadow-lg rounded-lg p-8 max-w-md w-full">
-        <h1 class="text-center text-2xl font-semibold mb-6">Create Client</h1>
+        <h1 class="text-center text-2xl font-semibold mb-6">Create employe</h1>
         <form method="post" action="/employe-create">
             <div class="relative z-0 w-full mb-6 group">
                 <input type="text" name="matricule" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder="  " />

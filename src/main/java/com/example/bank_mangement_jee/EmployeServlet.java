@@ -18,7 +18,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
-@WebServlet(urlPatterns = {"/employe-create", "/employe-update","/employe-display","/employe-search"})
+@WebServlet(urlPatterns = {"/employe-create", "/employe-update","/employe-display","/employe-search","/employe-delete"})
 public class EmployeServlet extends HttpServlet {
     String mat;
     String fname;
@@ -54,6 +54,11 @@ public class EmployeServlet extends HttpServlet {
             case "/employe-search" :
                 String param = request.getParameter("param");
                 request.setAttribute("employes",service.search(param));
+                request.getRequestDispatcher("/EmployePages/display.jsp").forward(request, response);
+                break;
+            case "/employe-delete" :
+                service.delete(request.getParameter("id"));
+                request.setAttribute("employes",service.getAll());
                 request.getRequestDispatcher("/EmployePages/display.jsp").forward(request, response);
                 break;
             default:

@@ -61,6 +61,23 @@ public class ImpEmploye implements IEmploye {
         return Optional.empty();
     }
 
+    @Override
+    public boolean delete(String id) {
+        try {
+            String deleteSql = "DELETE FROM employe WHERE matricule like ?";
+            PreparedStatement preparedStatement = cnx.prepareStatement(deleteSql);
+            preparedStatement.setString(1, id);
+            int rowsAffected = preparedStatement.executeUpdate();
+            if (rowsAffected > 0) {
+                return true;
+            }
+        }
+        catch (SQLException e){
+            System.out.print(e.getMessage());
+        }
+        return false;
+    }
+
     public ArrayList<Employe> getAll() {
         ArrayList<Employe> employes= new ArrayList<>();
         try {

@@ -29,7 +29,7 @@
     %>
     <form class="form" action="/employe-update" method="post">
         <div class="form-group">
-            <label >Matricule :</label>
+            <label hidden="hidden" >Matricule :</label>
             <input type="text" name="matricule" value="<%= emp.get().getMatricule() %>">
         </div>
         <div class="form-group">
